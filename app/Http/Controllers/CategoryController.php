@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Category;
+
 
 class CategoryController extends Controller
 {
@@ -13,7 +15,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::all();
+        return view('category',['categories'=>$categories,'layout'=>'index']);
     }
 
     /**
@@ -23,7 +26,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        return view('category',['categories'=>$categories,'layout'=>'create']);
     }
 
     /**
@@ -34,7 +38,11 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $category = new Category();
+        $category->name = $request->input('name');
+        $category->parent_id = $request->input('parent_id');
+        $category->save();
+        return redirect('/');
     }
 
     /**
@@ -45,7 +53,9 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        $category = Category::find($id);
+        $categories = Category::all();
+        return view('category',['categories'=>$categories,'category'=>$category,'layout'=>'show']);
     }
 
     /**
@@ -56,7 +66,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::find($id);
+        $categories = Category::all();
+        return view('category',['categories'=>$categories,'category'=>$category,'layout'=>'edit']);
     }
 
     /**
@@ -68,7 +80,11 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $category = Category::find($id);
+        $category->name = $request->input('name');
+        $category->parent_id = $request->input('parent_id');
+        $category->save();
+        return redirect('/');
     }
 
     /**
@@ -79,6 +95,8 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = Category::find($id);
+        $category->delete();
+        return redirect('/');
     }
 }

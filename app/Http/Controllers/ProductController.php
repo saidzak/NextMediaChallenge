@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class ProductController extends Controller
 {
@@ -13,7 +14,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::all();
+        return view('product',['products'=>$products,'layout'=>'index']);
     }
 
     /**
@@ -23,7 +25,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $products = Product::all();
+        return view('product',['products'=>$products,'layout'=>'create']);
     }
 
     /**
@@ -34,7 +37,14 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $product = new Product();
+        $product->name = $request->input('name');
+        $product->description = $request->input('description');
+        $product->price = $request->input('price');
+        $product->image_path = $request->input('image_path');
+        $product->save();
+        return redirect('/');
+
     }
 
     /**
@@ -45,7 +55,9 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        $product = Product::find($id);
+        $products = Product::all();
+        return view('product',['products'=>$products,'product'=>$product,'layout'=>'show']);
     }
 
     /**
@@ -56,7 +68,10 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::find($id);
+        $products = Product::all();
+        return view('product',['products'=>$products,'product'=>$product,'layout'=>'edit']);
+
     }
 
     /**
@@ -68,7 +83,14 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $product = Product::find($id);
+        $product->name = $request->input('name');
+        $product->description = $request->input('description');
+        $product->price = $request->input('price');
+        $product->image_path = $request->input('image_path');
+        $product->save();
+        return redirect('/');
+
     }
 
     /**
@@ -79,6 +101,8 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::find($id);
+        $product->delete();
+        return redirect('/');
     }
 }
