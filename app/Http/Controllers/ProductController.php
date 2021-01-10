@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Category;
+
 
 class ProductController extends Controller
 {
@@ -26,7 +28,8 @@ class ProductController extends Controller
     public function create()
     {
         $products = Product::all();
-        return view('product',['products'=>$products,'layout'=>'create']);
+        $categories = Category::all();
+        return view('product',['categories'=>$categories,'products'=>$products,'layout'=>'create']);
     }
 
     /**
@@ -41,9 +44,10 @@ class ProductController extends Controller
         $product->name = $request->input('name');
         $product->description = $request->input('description');
         $product->price = $request->input('price');
-        $product->image_path = $request->input('image_path');
+        $product->image = $request->input('category');
+        $product->image = $request->input('image');
         $product->save();
-        return redirect('/');
+        return redirect('/products');
 
     }
 
@@ -87,9 +91,10 @@ class ProductController extends Controller
         $product->name = $request->input('name');
         $product->description = $request->input('description');
         $product->price = $request->input('price');
-        $product->image_path = $request->input('image_path');
+        $product->image = $request->input('category');
+        $product->image = $request->input('image');
         $product->save();
-        return redirect('/');
+        return redirect('/products');
 
     }
 
@@ -103,6 +108,6 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $product->delete();
-        return redirect('/');
+        return redirect('/products');
     }
 }

@@ -11,3 +11,7 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+app/Console/Commands/CreateCategory.php
+app/Console/Commands/DeleteCategory.php
+app/Console/Commands/CreateProduct.php
+app/Console/Commands/DeleteProduct.php

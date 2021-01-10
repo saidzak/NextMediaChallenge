@@ -2,7 +2,7 @@
     <div class="card-body">
     
     
-      <form action="{{url('/update',$product->id)}}" method="post">
+      <form action="{{url('/products/update',$product->id)}}" method="post">
         @csrf
             <div class="card mb-3 ">
                 <div class="card-header ">

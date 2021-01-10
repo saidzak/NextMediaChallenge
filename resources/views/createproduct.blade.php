@@ -2,7 +2,7 @@
     <div class="card-body">
     
     
-      <form action="{{url('/store')}}" method="post">
+      <form action="{{url('/products/store')}}" method="post">
         @csrf
             <div class="card mb-3 ">
                 <div class="card-header ">
@@ -24,6 +24,16 @@
                             <label>Price</label>
                             <input type="number" step="0.01" class="form-control" name="price">
                         </div>
+
+                        <div class="col-md-6 mb-3">
+                          <label>Category</label>
+                          @foreach ($categories as $category)
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" value="{{$category->name}}" name="category">
+                              <label class="form-check-label">{{$category->name}}</label>
+                            </div>
+                          @endforeach
+                      </div>
 
                         <div class="col-md-6 mb-3">
                             <label>Image</label>

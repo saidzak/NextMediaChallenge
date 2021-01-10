@@ -40,9 +40,9 @@ class CategoryController extends Controller
     {
         $category = new Category();
         $category->name = $request->input('name');
-        $category->parent_id = $request->input('parent_id');
+        $category->parent = $request->input('parent');
         $category->save();
-        return redirect('/');
+        return redirect('/categories');
     }
 
     /**
@@ -82,9 +82,9 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
         $category->name = $request->input('name');
-        $category->parent_id = $request->input('parent_id');
+        $category->parent = $request->input('parent');
         $category->save();
-        return redirect('/');
+        return redirect('/categories');
     }
 
     /**
@@ -97,6 +97,6 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
         $category->delete();
-        return redirect('/');
+        return redirect('/categories');
     }
 }
