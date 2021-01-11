@@ -29,3 +29,4 @@ Then type the name of Product as it is
 ------------------------------------------- Tasks not done ----------------------
 I have not added a automated test.
 Each product can only have one category "I didn't created a product_category table"
+Images did not show 

@@ -37,7 +37,7 @@
 
                         <div class="col-md-6 mb-3">
                             <label>Image</label>
-                            <input class="form-control" type="file" name="image_path" accept="image/x-png,image/gif,image/jpeg">
+                            <input class="form-control" type="file" name="image" accept="image/x-png,image/gif,image/jpeg">
                           </div>
                 </div>
             </div>
