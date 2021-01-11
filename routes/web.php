@@ -11,6 +11,11 @@ Route::post('/products/store',"App\Http\Controllers\ProductController@store");
 Route::post('/products/update/{id}',"App\Http\Controllers\ProductController@update");
 Route::get('/products/destroy/{id}', "App\Http\Controllers\ProductController@destroy");
 
+Route::get('/products/sortbyname',"App\Http\Controllers\ProductController@sortbyname");
+Route::get('/products/sortbyprice',"App\Http\Controllers\ProductController@sortbyprice");
+Route::get('/products/category/{id}',"App\Http\Controllers\ProductController@filterbycategory");
+
+
 
 //Category Routes
 Route::get('/categories',"App\Http\Controllers\CategoryController@index");

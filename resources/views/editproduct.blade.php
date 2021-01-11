@@ -24,10 +24,20 @@
                             <label>Price</label>
                             <input type="number" step="0.01" class="form-control" name="price" value="{{$product->price}}">
                         </div>
+                        
+                        <div class="col-md-6 mb-3">
+                          <label>Category</label>
+                          @foreach ($categories as $category)
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" value="{{$category->name}}" name="category">
+                              <label class="form-check-label">{{$category->name}}</label>
+                            </div>
+                          @endforeach
+                      </div>
 
                         <div class="col-md-6 mb-3">
                             <label>Image</label>
-                            <input class="form-control" type="file" name="image_path" accept="image/x-png,image/gif,image/jpeg"  value="{{$product->image_path}}">
+                            <input class="form-control" type="file" name="image" accept="image/x-png,image/gif,image/jpeg"  value="{{$product->image}}">
                           </div>
                 </div>
             </div>

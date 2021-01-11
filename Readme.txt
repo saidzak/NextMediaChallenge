@@ -25,3 +25,7 @@ Then type the name of Category as it is
 to delete a Product you have to type: 
 php artisan delete:product
 Then type the name of Product as it is
+
+------------------------------------------- Tasks not done ----------------------
+I have not added a automated test.
+Each product can only have one category "I didn't created a product_category table"

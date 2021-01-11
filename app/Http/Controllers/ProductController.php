@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
+use DB;
+
 
 
 class ProductController extends Controller
@@ -17,7 +19,8 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
-        return view('product',['products'=>$products,'layout'=>'index']);
+        $categories = Category::all();
+        return view('product',['categories'=>$categories,'products'=>$products,'layout'=>'index']);
     }
 
     /**
@@ -61,7 +64,8 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $products = Product::all();
-        return view('product',['products'=>$products,'product'=>$product,'layout'=>'show']);
+        $categories = Category::all();
+        return view('product',['categories'=>$categories,'products'=>$products,'product'=>$product,'layout'=>'show']);
     }
 
     /**
@@ -74,7 +78,8 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $products = Product::all();
-        return view('product',['products'=>$products,'product'=>$product,'layout'=>'edit']);
+        $categories = Category::all();
+        return view('product',['categories'=>$categories,'products'=>$products,'product'=>$product,'layout'=>'edit']);
 
     }
 
@@ -91,7 +96,7 @@ class ProductController extends Controller
         $product->name = $request->input('name');
         $product->description = $request->input('description');
         $product->price = $request->input('price');
-        $product->image = $request->input('category');
+        $product->category = $request->input('category');
         $product->image = $request->input('image');
         $product->save();
         return redirect('/products');
@@ -109,5 +114,38 @@ class ProductController extends Controller
         $product = Product::find($id);
         $product->delete();
         return redirect('/products');
+    }
+
+    public function sortbyname()
+    {
+        $products = Product::all();
+        $categories = Category::all();
+        $products = $products->sortBy(function($product){
+            return strtolower ($product->name);
+        });
+        return view('product',['categories'=>$categories,'products'=>$products,'layout'=>'sortbyname']);
+    }
+
+    
+    public function sortbyprice()
+    {
+        $products = Product::all();
+        $categories = Category::all();
+        $products = $products->sortBy(function($product){
+            return ($product->price);
+        });
+        return view('product',['categories'=>$categories,'products'=>$products,'layout'=>'sortbyname']);
+    }
+
+    
+    public function filterbycategory($id)
+    {
+        $category = Category::find($id);
+        $categories = Category::all();
+        // $products = Product::all()->where('category','=',$category->name)->get($this);
+        $products = DB::table('Products')->where('category','=',$category->name)->get();
+
+        
+        return view('product',['categories'=>$categories,'products'=>$products,'layout'=>'sortbyname']);
     }
 }

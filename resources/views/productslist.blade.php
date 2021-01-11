@@ -1,6 +1,21 @@
 
 <div class="container">
   @include('navbar')
+  <a href="{{url('/products/sortbyname')}}" style="margin-right: 3%">Sort By Name</a>
+  <a href="{{url('/products/sortbyprice')}}" >Sort By Price</a>
+
+
+    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin-left: 3%">Filter By Category</button>
+    <ul class="dropdown-menu">
+
+      @foreach ($categories as $category)
+      <li><a class="dropdown-item" href="{{url('/products/category',$category->id)}}">{{$category->name}}</a></li>
+      @endforeach
+      
+      
+    </ul>
+
+
     <table class="table">
         <thead>
           <tr>
@@ -20,7 +35,7 @@
             <td>{{$product->description}}</td>
             <td>{{$product->price}}</td>
             <td>{{$product->category}}</td>
-            <td><img src="{{$product->image_path}}"></td>
+            <td><img src="{{$product->image}}"></td>
             <td>
                 <a href="{{ url('/products/show' , $product->id ) }}" class="btn btn-sm btn-info">Show</a>
                 <a href="{{ url('/products/edit', $product->id) }}" class="btn btn-sm btn-warning">Edit</a>
